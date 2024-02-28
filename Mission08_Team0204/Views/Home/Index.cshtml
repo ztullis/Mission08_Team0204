@@ -1,4 +1,5 @@
-﻿<div class="container">
+﻿@model List<Mission08_Team0204.Models.Task>
+<div class="container">
     <h1 class="text-center">Stephen Covey's Time Management Matrix</h1>
     <div>
         <br />
@@ -26,11 +27,11 @@
         </div>
         <div class="col-5">
             <h4>Quadrant 1</h4>
-                @* @foreach (var item in yourDatabaseItems)
+                @foreach (var item in Task)
                 {
                     <div class="row">
                         <div class="col-6">
-                            <p>@item.Name</p>
+                            <p>@item.TaskStr</p>
                         </div>
                         <div class="col-3">
                             <button class="btn btn-primary">Edit</button>
@@ -39,15 +40,15 @@
                             <button class="btn btn-danger">Delete</button>
                         </div>
                     </div>
-                } *@
+                }
         </div>
             <div class="col-5">
                 <h4>Quadrant 2</h4>
-                @* @foreach (var item in yourDatabaseItems)
+                @foreach (var item in Task)
                 {
                     <div class="row">
                         <div class="col-6">
-                            <p>@item.Name</p>
+                            <p>@item.TaskStr</p>
                         </div>
                         <div class="col-3">
                             <button class="btn btn-primary">Edit</button>
@@ -56,7 +57,7 @@
                             <button class="btn btn-danger">Delete</button>
                         </div>
                     </div>
-                } *@
+                }
             </div>
     </div>
     <div>
@@ -70,11 +71,11 @@
             </div>
             <div class="col-5">
                 <h4>Quadrant 3</h4>
-                @* @foreach (var item in yourDatabaseItems)
+                @foreach (var item in Task)
                 {
                     <div class="row">
                         <div class="col-6">
-                            <p>@item.Name</p>
+                            <p>@item.TaskStr</p>
                         </div>
                         <div class="col-3">
                             <button class="btn btn-primary">Edit</button>
@@ -83,15 +84,15 @@
                             <button class="btn btn-danger">Delete</button>
                         </div>
                     </div>
-                } *@
+                }
             </div>
             <div class="col-5">
                 <h4>Quadrant 4</h4>
-                @* @foreach (var item in yourDatabaseItems)
+                @foreach (var item in Task)
                 {
                     <div class="row">
                         <div class="col-6">
-                            <p>@item.Name</p>
+                            <p>@item.TaskStr</p>
                         </div>
                         <div class="col-3">
                             <button class="btn btn-primary">Edit</button>
@@ -100,7 +101,7 @@
                             <button class="btn btn-danger">Delete</button>
                         </div>
                     </div>
-                } *@
+                }
             </div>
         </div>
     </table>
