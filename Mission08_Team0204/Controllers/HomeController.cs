@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-//using Mission08_Team0204.Models;
+using Mission08_Team0204.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace Mission08_Team0204.Controllers
@@ -14,36 +15,36 @@ namespace Mission08_Team0204.Controllers
 
         public IActionResult Index()
         {
-            var listOfTasks = _repo.Tasks
-                .Include(m => m.Category);
+            var listOfTasks = _repo.Tasks;
+            //    .Include(m => m.Category);
 
-            return View(listOfTasks);
+            return View("Index", listOfTasks);
         }
 
         [HttpGet]
         public IActionResult AddTask()
         {
             ViewBag.CategoryViewBag = _repo.Categories
-                .OrderBy(x => x.CategoryName)
-                .ToList();
+                .OrderBy(x => x.CategoryName);
 
-            return View(new Task());
+            return View(new Mission08_Team0204.Models.Task());
         }
 
         [HttpPost]
-        public IActionResult AddTask(Task response)
+        public IActionResult AddTask(Mission08_Team0204.Models.Task response)
         {
             if (ModelState.IsValid)
             {
                 _repo.AddTask(response);
+                return View("Index", response);
             }
             else
             {
                 ViewBag.CategoryViewBag = _repo.Categories
                     .OrderBy(x => x.CategoryName)
                     .ToList();
+                return View(response);
             }
-            return View();
         }
 
         [HttpGet]
@@ -52,14 +53,14 @@ namespace Mission08_Team0204.Controllers
             var recordToEdit = _repo.Tasks
                 .Single(x => x.TaskId == id);
 
-            ViewBag.TaskViewBag = _repo.Categories
-                .OrderBy(x => x.CategoryName);
+            //ViewBag.TaskViewBag = _repo.Categories
+            //    .OrderBy(x => x.CategoryName);
 
             return View("AddTask", recordToEdit);
         }
 
         [HttpPost]
-        public IActionResult Edit(Task updatedTask)
+        public IActionResult Edit(Mission08_Team0204.Models.Task updatedTask)
         {
             if (ModelState.IsValid)
             {
@@ -67,9 +68,9 @@ namespace Mission08_Team0204.Controllers
             }
             else
             {
-                ViewBag.CategoryViewBag = _repo.Categories
-                    .OrderBy(x => x.CategoryName)
-                    .ToList();
+                //ViewBag.CategoryViewBag = _repo.Categories
+                //    .OrderBy(x => x.CategoryName)
+                //    .ToList();
             }
 
             return View("Index", updatedTask);
@@ -78,13 +79,14 @@ namespace Mission08_Team0204.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var taskToDelete = _repo.GetTask(id);
+            var taskToDelete = _repo.Tasks
+                .Single(x => x.TaskId == id);
 
             return View(taskToDelete);
         }
 
         [HttpPost]
-        public IActionResult Delete(Task taskToDelete)
+        public IActionResult Delete(Mission08_Team0204.Models.Task taskToDelete)
         {
             _repo.DeleteTask(taskToDelete);
 
