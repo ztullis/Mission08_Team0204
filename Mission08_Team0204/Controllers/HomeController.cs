@@ -42,6 +42,8 @@ namespace Mission08_Team0204.Controllers
                     .OrderBy(x => x.CategoryName)
                     .ToList();
             }
+
+            return View();
         }
 
         [HttpGet]
