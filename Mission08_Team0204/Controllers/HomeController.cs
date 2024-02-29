@@ -14,9 +14,10 @@ namespace Mission08_Team0204.Controllers
 
         public IActionResult Index()
         {
-            var allTasks = _repo.GetAllTasks();
+            var listOfTasks = _repo.Tasks
+                .Include(m => m.Category);
 
-            return View(allTasks);
+            return View(listOfTasks);
         }
 
         [HttpGet]
@@ -32,7 +33,7 @@ namespace Mission08_Team0204.Controllers
         [HttpPost]
         public IActionResult AddTask(Task response)
         {
-            if ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _repo.AddTask(response);
             }
@@ -49,7 +50,11 @@ namespace Mission08_Team0204.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var recordToEdit = _repo.GetTask(id);
+            var recordToEdit = _repo.Tasks
+                .Single(x => x.TaskId == id);
+
+            ViewBag.TaskViewBag = _repo.Categories
+                .OrderBy(x => x.CategoryName);
 
             return View("AddTask", recordToEdit);
         }
@@ -57,7 +62,7 @@ namespace Mission08_Team0204.Controllers
         [HttpPost]
         public IActionResult Edit(Task updatedTask)
         {
-            if ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _repo.EditTask(updatedTask);
             }
