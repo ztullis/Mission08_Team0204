@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Confirmation";
+}
+@model Task
+<h2>Confirm Deletion?</h2>
+<h3>@Model.TaskStr</h3>
+<p>Are you sure you want to delete?</p>
+
+<form asp-controller="Home" asp-action="Delete" method="post">
+    <input type="hidden" asp-for="TaskId" />
+    <button type="submit">Delete</button>
+    <a class="btn btn-info" asp-controller="Home" asp-action="Index">Cancel</a>
+</form>
