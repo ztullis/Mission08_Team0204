@@ -9,10 +9,11 @@ namespace Mission08_Team0204.Models
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TaskId { get; set; }
-        [Required]
+        [Required(ErrorMessage ="You must enter a Task")]
         public string TaskStr {  get; set; }
-        public int? DueDate { get; set; }
-        [Required]
+        public DateTime? DueDate { get; set; }
+
+        [Required(ErrorMessage = "You must select a Quadrant")]
         public int Quadrant { get; set; }
 
         [ForeignKey("CategoryId")]

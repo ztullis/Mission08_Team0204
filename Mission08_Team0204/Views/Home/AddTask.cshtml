@@ -13,8 +13,7 @@
 
         <label asp-for="Quadrant">Which quadrant does this fall under?</label>
         <select asp-for="Quadrant">
-            <option value="">Select a Quadrant</option>
-            <option value="1">Important, Urgent</option>
+            <option value="1" selected>Important, Urgent</option>
             <option value="2">Important, Non-Urgent</option>
             <option value="3">Non-Important, Urgent</option>
             <option value="4">Non-Important, Non-Urgent</option>
@@ -36,11 +35,11 @@
 
         <label asp-for="IsCompleted">Has the task been completed?</label>
         <select asp-for="IsCompleted">
-            <option value="">Select an option:</option>
-            <option value="0">False</option>
-            <option value="1">True</option>
+            <option value="false" selected>False</option>
+            <option value="true">True</option>
         </select>
-
+        <br /><br />
         <button type="submit">Submit</button>
+        <div asp-validation-summary="All"></div>
     </form>
 </div>
