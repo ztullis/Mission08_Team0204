@@ -7,6 +7,7 @@ namespace Mission08_Team0204.Models
     {
         [Key]
         [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TaskId { get; set; }
         [Required]
         public string TaskStr {  get; set; }
