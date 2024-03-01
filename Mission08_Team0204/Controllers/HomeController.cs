@@ -15,8 +15,8 @@ namespace Mission08_Team0204.Controllers
 
         public IActionResult Index()
         {
-            var listOfTasks = _repo.Tasks;
-            //    .Include(m => m.Category);
+            var listOfTasks = _repo.Tasks
+                .Where(t => t.IsCompleted == false).ToList();
 
             return View("Index", listOfTasks);
         }
@@ -34,21 +34,18 @@ namespace Mission08_Team0204.Controllers
         [HttpPost]
         public IActionResult AddTask(Mission08_Team0204.Models.Task response)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    _repo.AddTask(response);
-            //    return RedirectToAction("Index");
-            //}
-            //else
-            //{
-            //    ViewBag.CategoryViewBag = _repo.Categories
-            //        .OrderBy(x => x.CategoryName)
-            //        .ToList();
-            //    return View(response);
-            //}
-
-            _repo.AddTask(response);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _repo.AddTask(response);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.CategoryViewBag = _repo.Categories
+                    .OrderBy(x => x.CategoryName)
+                    .ToList();
+                return View(response);
+            }
         }
 
         [HttpGet]
@@ -57,8 +54,8 @@ namespace Mission08_Team0204.Controllers
             var recordToEdit = _repo.Tasks
                 .Single(x => x.TaskId == id);
 
-            //ViewBag.TaskViewBag = _repo.Categories
-            //    .OrderBy(x => x.CategoryName);
+            ViewBag.CategoryViewBag = _repo.Categories
+                .OrderBy(x => x.CategoryName).ToList();
 
             return View("AddTask", recordToEdit);
         }
@@ -69,15 +66,16 @@ namespace Mission08_Team0204.Controllers
             if (ModelState.IsValid)
             {
                 _repo.EditTask(updatedTask);
+
+                return RedirectToAction("Index");
             }
             else
             {
-                //ViewBag.CategoryViewBag = _repo.Categories
-                //    .OrderBy(x => x.CategoryName)
-                //    .ToList();
-            }
+                ViewBag.CategoryViewBag = _repo.Categories
+                .OrderBy(x => x.CategoryName).ToList();
 
-            return View("Index", updatedTask);
+                return View("AddMovie", updatedTask);
+            }
         }
 
         [HttpGet]
@@ -86,7 +84,7 @@ namespace Mission08_Team0204.Controllers
             var taskToDelete = _repo.Tasks
                 .Single(x => x.TaskId == id);
 
-            return View(taskToDelete);
+            return View("ConfirmDelete", taskToDelete);
         }
 
         [HttpPost]
