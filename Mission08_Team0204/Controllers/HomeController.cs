@@ -25,26 +25,30 @@ namespace Mission08_Team0204.Controllers
         public IActionResult AddTask()
         {
             ViewBag.CategoryViewBag = _repo.Categories
-                .OrderBy(x => x.CategoryName);
+                .OrderBy(x => x.CategoryName).ToList();
 
-            return View(new Mission08_Team0204.Models.Task());
+            var newTask = new Mission08_Team0204.Models.Task();
+            return View(newTask);
         }
 
         [HttpPost]
         public IActionResult AddTask(Mission08_Team0204.Models.Task response)
         {
-            if (ModelState.IsValid)
-            {
-                _repo.AddTask(response);
-                return View("Index", response);
-            }
-            else
-            {
-                ViewBag.CategoryViewBag = _repo.Categories
-                    .OrderBy(x => x.CategoryName)
-                    .ToList();
-                return View(response);
-            }
+            //if (ModelState.IsValid)
+            //{
+            //    _repo.AddTask(response);
+            //    return RedirectToAction("Index");
+            //}
+            //else
+            //{
+            //    ViewBag.CategoryViewBag = _repo.Categories
+            //        .OrderBy(x => x.CategoryName)
+            //        .ToList();
+            //    return View(response);
+            //}
+
+            _repo.AddTask(response);
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
