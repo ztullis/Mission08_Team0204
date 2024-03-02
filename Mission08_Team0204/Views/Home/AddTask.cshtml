@@ -4,42 +4,49 @@
 }
 @model Mission08_Team0204.Models.Task
 
-<h1>Input a Task!</h1>
-<div>
-    <form method="post">
-        <input type="hidden" asp-for="TaskId" />
-        <label asp-for="TaskStr">A short description of task!</label>
-        <input asp-for="TaskStr" /><br /><br />
+<div class="container"> <!-- Add a container to center the grid -->
+    <div class="row justify-content-center"> <!-- Use justify-content-center to center the column -->
+        <div class="col-lg-6"> <!-- Specify the column size -->
+            <h1>Input a Task!</h1>
+            <div>
+                <form method="post">
+                    <input type="hidden" asp-for="TaskId" />
+                    <label asp-for="TaskStr">A short description of task!</label>
+                    <input asp-for="TaskStr" /><br /><br />
 
-        <label asp-for="Quadrant">Which quadrant does this fall under?</label>
-        <select asp-for="Quadrant">
-            <option value="1" selected>Important, Urgent</option>
-            <option value="2">Important, Non-Urgent</option>
-            <option value="3">Non-Important, Urgent</option>
-            <option value="4">Non-Important, Non-Urgent</option>
-        </select>
-        <br /><br />
+                    <label asp-for="Quadrant">Which quadrant does this fall under?</label>
+                    <select asp-for="Quadrant">
+                        <option value="1" selected>Important, Urgent</option>
+                        <option value="2">Important, Non-Urgent</option>
+                        <option value="3">Non-Important, Urgent</option>
+                        <option value="4">Non-Important, Non-Urgent</option>
+                    </select>
+                    <br /><br />
 
-        <label asp-for="DueDate">Due Date:</label>
-        <input asp-for="DueDate" type="date" />
-        <br /><br />
+                    <label asp-for="DueDate">Due Date:</label>
+                    <input asp-for="DueDate" type="date" />
+                    <br /><br />
 
-        <select asp-for="CategoryId">
-            <option value ="">Select a Category</option>
-            @foreach (Category c in ViewBag.CategoryViewBag)
-            {
-                <option value="@c.CategoryId">@c.CategoryName</option>
-            }
-        </select>
-        <br /><br />
+                    <label asp-for="CategoryId">Category:</label>
+                    <select asp-for="CategoryId">
+                        <option value ="">Select a Category</option>
+                        @foreach (Category c in ViewBag.CategoryViewBag)
+                        {
+                            <option value="@c.CategoryId">@c.CategoryName</option>
+                        }
+                    </select>
+                    <br /><br />
 
-        <label asp-for="IsCompleted">Has the task been completed?</label>
-        <select asp-for="IsCompleted">
-            <option value="false" selected>False</option>
-            <option value="true">True</option>
-        </select>
-        <br /><br />
-        <button type="submit">Submit</button>
-        <div asp-validation-summary="All"></div>
-    </form>
-</div>
+                    <label asp-for="IsCompleted">Has the task been completed?</label>
+                    <select asp-for="IsCompleted">
+                        <option value="false" selected>False</option>
+                        <option value="true">True</option>
+                    </select>
+                    <br /><br />
+                    <button type="submit">Submit</button>
+                    <div asp-validation-summary="All"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div
