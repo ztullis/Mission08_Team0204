@@ -3,12 +3,18 @@
     ViewData["Title"] = "Confirmation";
 }
 @model Mission08_Team0204.Models.Task
-<h2>Confirm Deletion?</h2>
-<h3>@Model.TaskStr</h3>
-<p>Are you sure you want to delete?</p>
+<div class="container"> <!-- Add a container to center the grid -->
+    <div class="row justify-content-center"> <!-- Use justify-content-center to center the column -->
+        <div class="col-lg-6"> <!-- Specify the column size -->
+            <form asp-controller="Home" asp-action="Delete" method="post">
+                <h2>Confirm Deletion?</h2>
+                <h3>@Model.TaskStr</h3>
+                <p>Are you sure you want to delete?</p>
 
-<form asp-controller="Home" asp-action="Delete" method="post">
-    <input type="hidden" asp-for="TaskId" />
-    <button type="submit">Delete</button>
-    <a class="btn btn-info" asp-controller="Home" asp-action="Index">Cancel</a>
-</form>
+                <input type="hidden" asp-for="TaskId" />
+                <button type="submit" class="btn btn-danger">Delete</button> <!-- Add Bootstrap button class -->
+                <a class="btn btn-info" asp-controller="Home" asp-action="Index">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div
